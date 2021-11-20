@@ -116,6 +116,11 @@ async def on_ready():
         await log.send(embed=embed)
 
         del errors[i]
+    
+    sum=len(set(bot.get_all_members()))
+    status= f"{len(bot.guilds)};{sum}"
+    with open('/home/pi/botfolder/rpistats.txt', 'w') as f:
+        f.write(status)
 
 @bot.command("load", hidden=True)
 @commands.is_owner()
@@ -359,9 +364,12 @@ async def on_command_error(ctx, error):
         await ctx.send("You don't have permission to do that!")
     elif str(error).startswith('You are on cooldown. Try again in') or (str(error).startswith("Command \"") and str(error).endswith("\" is not found")) or str(error).endswith("is a required argument that is missing."):
         await ctx.send(error)
+    elif str(error).startswith('You are missing at least one of the required roles:'):
+        await ctx.send("You do not have permission to run this command!")
     else:
         
-        embed = discord.Embed(title="Unknown Error", description="Devs: Check Log Channel For Errors".format(error), color=0x9c0b21)
+        #embed = discord.Embed(title="Unknown Error", description="Devs: Check Log Channel For Errors".format(error), color=0x9c0b21)
+        embed = discord.Embed(title="Error", description="```py\n{}\n```".format(error), color=0x9c0b21)
         await ctx.send(embed=embed)
 
         log = bot.get_channel(ErrorChannel)

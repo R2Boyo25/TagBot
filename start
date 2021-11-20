@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /home/pi/python_files/RPi-bot/RPiBot
+#/home/pi/.local/bin/watchmedo auto-restart -R -p "*.py" python3 bot.py
+python3 bot.py

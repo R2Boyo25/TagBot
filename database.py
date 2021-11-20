@@ -13,7 +13,12 @@ class Database(object):
             raise Exception(f"File \"{self.location}\" could not be found")
 
     def _load(self):
-        self.db = json.load(open(self.location , "r"))
+        try:
+            f = open(self.location , "r")
+        except:
+            self.db = {}
+            return
+        self.db = json.load(f)
 
     def dumpdb(self):
         json.dump(self.db , open(self.location, "w+"), indent=4)
@@ -41,3 +46,9 @@ class Database(object):
     
     def keys(self):
         return self.db.keys()
+    
+    def __getitem__(self, key):
+        return self.db[key]
+    
+    def __setitem__(self, key, value):
+        self.set(key, value)
