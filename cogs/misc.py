@@ -1,4 +1,5 @@
 import discord
+import os
 from discord.ext import commands
 from utils.funcs import *
 from database import Database as db
@@ -21,6 +22,10 @@ class MiscCog(commands.Cog):
     @commands.has_any_role(*Trusted)
     async def mathCom(self, ctx, *, com):
         await ctx.send(str(eval(com)))
+    
+    @commands.command(name='proc')
+    async def getProc(self, ctx):
+        await ctx.send(os.getpid())
 
 def setup(bot):
     bot.add_cog(MiscCog(bot))

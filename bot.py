@@ -362,7 +362,9 @@ async def on_command_error(ctx, error):
 
     if str(error) == 'MissingPermission':
         await ctx.send("You don't have permission to do that!")
-    elif str(error).startswith('You are on cooldown. Try again in') or (str(error).startswith("Command \"") and str(error).endswith("\" is not found")) or str(error).endswith("is a required argument that is missing."):
+    elif (str(error).startswith("Command \"") and str(error).endswith("\" is not found")):
+        return 
+    elif str(error).startswith('You are on cooldown. Try again in') or str(error).endswith("is a required argument that is missing."):
         await ctx.send(error)
     elif str(error).startswith('You are missing at least one of the required roles:'):
         await ctx.send("You do not have permission to run this command!")
