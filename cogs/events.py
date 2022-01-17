@@ -3,6 +3,34 @@ from utils.funcs import *
 from database import Database as db
 import procmessage
 
+async def tag(ctx, message):
+    tag = message.lstrip("??").lower()
+
+    data = db("tags.json")
+
+    if tag in data.keys():
+
+        embed = discord.Embed(title = tag, description = data[tag]['text'])
+
+        try:
+            embed.set_image(url = data[tag]['image'])
+        except KeyError:
+            pass
+        try:
+            author = ctx.guild.get_member(int(data[tag]['author']))
+            try:
+                embed.set_author(name = author.nick, icon_url = author.avatar_url)
+            except:
+                embed.set_author(name = author.name, icon_url = author.avatar_url)
+        except:
+            pass
+
+        await ctx.channel.send(embed = embed)
+
+    else:
+
+        await ctx.channel.send(f"Tag \"{tag}\" not found.")
+
 def setup(bot):
     @bot.event
     async def on_ready():
@@ -21,6 +49,10 @@ def setup(bot):
     async def on_message(message):
 
         if message.author == bot.user:
+            return
+        
+        if message.content.startswith("??"):
+            await tag(message, message.content)
             return
         
         for word in config('reactions').keys():
