@@ -68,8 +68,7 @@ def setup(bot):
         await procmessage.processMessage(message, bot)
 
         if str(message.content).replace(' ', '') == bot.user.mention: 
-            await message.channel.send("You poinged? do .help (or [yourserverseprefix]help)")
+            await message.channel.send("You pinged? do .help (or [yourserverseprefix]help)")
 
 
         await bot.process_commands(message)
-    
