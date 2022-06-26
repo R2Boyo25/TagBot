@@ -185,7 +185,7 @@ async def reloadExtension(ctx, extension):
 
         except Exception as error:
             print(f"Failed to reload {ext}")
-            cogs[ext] = False
+            #cogs[ext] = False
 
             embed=discord.Embed(title=f"Failed to reload {ext}", description="```py\n{}\n```".format(error), color=0x9c0b21)
             await ctx.send(embed=embed)
@@ -258,7 +258,7 @@ async def reloadAllExtensionsj(ctx):
             cogs[ext.replace(".py", "")] = True
         except:
             print(f"Failed to reload {ext}")
-            cogs[ext.replace(".py", "")] = False
+            #cogs[ext.replace(".py", "")] = False
     
     await ctx.send(":white_check_mark: Reloaded extensions")
 
