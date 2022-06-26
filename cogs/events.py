@@ -28,8 +28,8 @@ async def tag(ctx, message):
         await ctx.channel.send(embed = embed)
 
     else:
-
-        await ctx.channel.send(f"Tag \"{tag}\" not found.")
+        if tag.strip() != "":
+            await ctx.channel.send(f"Tag \"{tag}\" not found.")
 
 def setup(bot):
     @bot.event
