@@ -1,5 +1,8 @@
 import discord
+<<<<<<< HEAD
 import os
+=======
+>>>>>>> e50a8c1 (fix merge conflict)
 from discord.ext import commands
 from utils.funcs import *
 from database import Database as db

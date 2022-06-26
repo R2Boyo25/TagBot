@@ -70,5 +70,4 @@ def setup(bot):
         if str(message.content).replace(' ', '') == bot.user.mention: 
             await message.channel.send("You pinged? do .help (or [yourserverseprefix]help)")
 
-
         await bot.process_commands(message)
